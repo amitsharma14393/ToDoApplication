@@ -5,7 +5,7 @@ controllerModule.controller("RegisterController",function($scope){
 });
 
 controllerModule.controller("LoginController",function($scope){
-	$scope.login="Welcome to login process!";
+	$scope.login="Welcome to login page!";
 });
 
 controllerModule.controller("TodoController",function($scope){
