@@ -1,0 +1,51 @@
+<html ng-app="todo">
+<head>
+<title>Welcome to toDo Application</title>
+<link rel="stylesheets" href="stylesheets/bootstrap/css/bootstrap.css">
+<script src="javascripts/jquery-3.0.0.min.js"></script>
+<script src="javascripts/angular.min.js"></script>
+<script type="text/javascript" src="javascripts/angular-route.min.js"></script>
+<script type="text/javascript" src="javascripts/angular-resource.min.js"></script>
+<script type="text/javascript" src="javascripts/angular-animate.min.js"></script>
+<script type="text/javascript" src="javascripts/scripts/controllers.js"></script>
+<script type="text/javascript" src="javascripts/scripts/directives.js"></script>
+<script src="../javascripts/scripts/app.js"></script>
+</head>
+<body>
+<h1>Welcome to Node Express Angular Application!</h1>
+<a href="#/login">login</a>
+<a href="#/register">register</a>
+<a href="#/create">create</a>
+<div ng-view></div>
+
+<div ng-controller="TodoController">
+<!-- Show Todo -->
+	<div>
+
+	</div>
+<!-- Add Todo -->
+	<div>
+	<div style="text-align:center"><button ng-click="add()">Add todo</button></div>
+	<div ng-repeat="todo in todoList track by $index" ng-init="todo.display=true">
+			<div ng-show="todo.display">
+				<input type="text" ng-model="todo.title" placeholder="Enter title">
+				<input type="text" ng-model="todo.description" placeholder="Enter description">
+				<select ng-model="todo.status"  ng-options="status for status in ['to do','in progress','done']"></select>
+				<input  ng-model="todo.hours" type="text" placeholder="Enter hours">
+				<button ng-click="todo.display=false">save</button>
+				<button ng-click="remove($index)">remove</button>
+			</div>
+			<div ng-hide="todo.display">
+				<label>{{todo.title}}</label>
+				<label>{{todo.description}}</label>
+				<label>{{todo.status}}</label>
+				<label>{{todo.hours}}</label>
+				<button ng-click="todo.display=true">edit</button>
+				<button ng-click="remove($index)">remove</button>	
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</body>
+</html>
