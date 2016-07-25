@@ -1,4 +1,4 @@
-var todoapp=angular.module("todo",["controllerModule","directiveModule","ngRoute"]);
+var todoapp=angular.module("todo",["ngAnimate","ui.bootstrap","controllerModule","directiveModule","ngRoute"]);
 
 todoapp.config(["$routeProvider",function ($routeProvider){
 	$routeProvider.when("/login",{
