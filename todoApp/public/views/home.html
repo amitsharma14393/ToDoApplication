@@ -96,14 +96,16 @@ In JavaScript, a setter can be used to execute a function whenever a specified p
 						<!-- toDoName,	toDoTaskList  -->
 						<uib-accordion close-others="false">
 						<div ng-repeat="toDo in collectionOfTodo track by $index">
-
+							
 							<div uib-accordion-group class="panel-default"
 								heading="{{toDo.toDoName}}" is-open="false">
-								<div ng-repeat="taskList in toDo.toDoTaskList">
+								<uib-tabset justified="true" type="pills">
+									<uib-tab heading="to do" index="1">
+										<div ng-repeat="taskList in toDo.toDoTaskList| filter:{status:'to Do'}">
 									<div ng-init="taskList.showEdit=false">
 										<div class="row">
 											<div class="col-sm-3">
-												<input type="text" ng-model="taskList.taskName"
+												<input type="text" class="form-control" ng-model="taskList.taskName"
 													ng-show="taskList.showEdit">
 												<div style="cursor: pointer"
 													ng-click="taskList.showEdit=true"
@@ -111,8 +113,8 @@ In JavaScript, a setter can be used to execute a function whenever a specified p
 
 											</div>
 											<div class="col-sm-3">
-												<input type="text" ng-model="taskList.description"
-													ng-show="taskList.showEdit">
+												<textarea type="text" class="form-control" ng-model="taskList.description"
+													ng-show="taskList.showEdit"></textarea>
 												<div style="cursor: pointer"
 													ng-click="taskList.showEdit=true"
 													ng-hide="taskList.showEdit">{{taskList.description}}</div>
@@ -120,7 +122,7 @@ In JavaScript, a setter can be used to execute a function whenever a specified p
 											</div>
 											<div class="col-sm-3">
 
-												<select ng-model="taskList.status"
+												<select ng-model="taskList.status" class="form-control"
 													ng-show="taskList.showEdit"
 													ng-options="status for status in ['to do','in progress','done']"></select>
 												<div style="cursor: pointer"
@@ -131,13 +133,64 @@ In JavaScript, a setter can be used to execute a function whenever a specified p
 											</div>
 
 											<div class="col-sm-3">
-												<input type="text" ng-model="taskList.hours"
+												<input type="text" ng-model="taskList.hours" class="form-control"
 													ng-show="taskList.showEdit">
 												<div style="cursor: pointer"
 													ng-click="taskList.showEdit=true"
 													ng-hide="taskList.showEdit">{{taskList.hours}}</div>
 
-												<button ng-show="taskList.showEdit"
+												<button ng-show="taskList.showEdit" class="btn btn-primary pull-right" style="margin-top:5%;"
+													ng-click="taskList.showEdit=false">save</button>
+											</div>
+										</div>
+
+
+
+
+
+									</div>
+								</div>	
+									</uib-tab>
+									<uib-tab heading="in progress" index="2">
+										<div ng-repeat="taskList in toDo.toDoTaskList| filter:{status:'in progress'}">
+									<div ng-init="taskList.showEdit=false">
+										<div class="row">
+											<div class="col-sm-3">
+												<input type="text" class="form-control" ng-model="taskList.taskName"
+													ng-show="taskList.showEdit">
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.taskName}}</div>
+
+											</div>
+											<div class="col-sm-3">
+												<textarea type="text" class="form-control" ng-model="taskList.description"
+													ng-show="taskList.showEdit"></textarea>
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.description}}</div>
+
+											</div>
+											<div class="col-sm-3">
+
+												<select ng-model="taskList.status" class="form-control"
+													ng-show="taskList.showEdit"
+													ng-options="status for status in ['to do','in progress','done']"></select>
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.status}}</div>
+
+
+											</div>
+
+											<div class="col-sm-3">
+												<input type="text" ng-model="taskList.hours" class="form-control"
+													ng-show="taskList.showEdit">
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.hours}}</div>
+
+												<button ng-show="taskList.showEdit" class="btn btn-primary pull-right" style="margin-top:5%;"
 													ng-click="taskList.showEdit=false">save</button>
 											</div>
 										</div>
@@ -148,6 +201,60 @@ In JavaScript, a setter can be used to execute a function whenever a specified p
 
 									</div>
 								</div>
+									</uib-tab>
+									<uib-tab heading="done" index="3">
+										<div ng-repeat="taskList in toDo.toDoTaskList| filter:{status:'done'}">
+									<div ng-init="taskList.showEdit=false">
+										<div class="row">
+											<div class="col-sm-3">
+												<input type="text" class="form-control" ng-model="taskList.taskName"
+													ng-show="taskList.showEdit">
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.taskName}}</div>
+
+											</div>
+											<div class="col-sm-3">
+												<textarea type="text" class="form-control" ng-model="taskList.description"
+													ng-show="taskList.showEdit"></textarea>
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.description}}</div>
+
+											</div>
+											<div class="col-sm-3">
+
+												<select ng-model="taskList.status" class="form-control"
+													ng-show="taskList.showEdit"
+													ng-options="status for status in ['to do','in progress','done']"></select>
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.status}}</div>
+
+
+											</div>
+
+											<div class="col-sm-3">
+												<input type="text" ng-model="taskList.hours" class="form-control"
+													ng-show="taskList.showEdit">
+												<div style="cursor: pointer"
+													ng-click="taskList.showEdit=true"
+													ng-hide="taskList.showEdit">{{taskList.hours}}</div>
+
+												<button ng-show="taskList.showEdit" class="btn btn-primary pull-right" style="margin-top:5%;"
+													ng-click="taskList.showEdit=false">save</button>
+											</div>
+										</div>
+
+
+
+
+
+									</div>
+								</div>
+									</uib-tab>
+								</uib-tabset>
+								
 							</div>
 						</uib-accordion>
 						<div>
